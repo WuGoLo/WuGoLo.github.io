@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css">
+    <link rel="stylesheet" href="http://iclient.supermap.io/dist/leaflet/iclient-leaflet.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
+    <script type="text/javascript" src="http://iclient.supermap.io/dist/leaflet/iclient-leaflet.js"></script>
+</head>
+<body>
+	<!-- 地图显示的div -->
+    <div id="map" style="position:absolute;left:0px;right:0px;width:800px;height:500px;"></div>
+    <script>
+    	//实例化地物编辑服务
+		var url="http://support.supermap.com.cn:8090/iserver/services/data-world/rest/data";
+		var featureService = L.supermap.featureService(url);
+		//设置地物编辑字段参数
+		var addFeatureParams = new SuperMap.EditFeaturesParameters({
+		    dataSourceName: "World",
+		    dataSetName: "Capitals",
+		    features: marker,
+		    editType: "add",
+		    returnContent: true
+		});
+		//使用地物编辑服务向服务端发送请求并获取数据
+		featureService.editFeatures(addFeatureParams, function (serviceResult) {
+		     // 获取返回数据
+		    var result = serviceResult.result;
+		});
+    </script>
+</body>
+</html>
